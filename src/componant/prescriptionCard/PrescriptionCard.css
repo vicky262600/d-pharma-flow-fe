@@ -1,0 +1,35 @@
+.prescription-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .prescription-card h4 {
+    font-size: 1.1em;
+    color: #0d47a1;
+    margin-bottom: 5px;
+  }
+  
+  .prescription-card p {
+    font-size: 0.9em;
+    color: #495057;
+    margin-bottom: 8px;
+  }
+  
+  .status {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    color: #fff;
+  }
+  
+  .status.pending {
+    background-color: #ff9800;
+  }
+  
+  .status.completed {
+    background-color: #4caf50;
+  }
+  

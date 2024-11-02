@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f2f9fa; /* Light background */
+    font-family: Arial, sans-serif;
+  }
+  
+  .doctor-register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .doctor-register-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 25px 30px;
+    background-color: #e0f7fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .doctor-register-container h2 {
+    color: #006064;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  label {
+    font-size: 0.9em;
+    color: #004d40;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b2ebf2;
+    border-radius: 6px;
+    font-size: 0.95em;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004d40;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #00363a;
+  }
+  
