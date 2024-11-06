@@ -4,8 +4,10 @@ import Landing from "./pages/landing/Landing";
 import Register from "./pages/register/Register";
 import DoctorRegister from "./pages/doctorRegister.jsx/DoctorRegister";
 import PatientRegister from "./pages/patientRegister/PatientRegister";
+import PharmacistRegister from "./pages/pharmacistRegister/PharmacistRegister";
 import DoctorPrescription from "./pages/doctorPrescription/DoctorPrescription";
 import Prescription from "./componant/prescriptionCard/PrescriptionCard";
+import Login from "./pages/login/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,8 +16,10 @@ root.render(
     {/* <Register /> */}
     {/* <DoctorRegister /> */}
     {/* <PatientRegister /> */}
-    <DoctorPrescription />
+    {/* <PharmacistRegister /> */}
+    // <DoctorPrescription />
     {/* <Prescription /> */}
+    <Login />
   </React.StrictMode>
 );
 

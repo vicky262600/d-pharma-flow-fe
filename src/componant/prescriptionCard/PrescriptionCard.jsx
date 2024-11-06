@@ -6,7 +6,7 @@ const PrescriptionCard = ({ prescriptions }) => {
     <div className="prescription-card">
       <h4>{prescriptions.patientName}</h4>
       <p>{prescriptions.medications}</p>
-      <span className={`status ${prescriptions.Status.toLowerCase()}`}>{prescriptions.Status}</span>
+      {/* <span className={`status ${prescriptions.Status.toLowerCase()}`}>{prescriptions.Status}</span> */}
     </div>
   );
 };
