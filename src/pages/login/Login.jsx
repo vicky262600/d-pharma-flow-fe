@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { loginStart, loginSuccess, loginFailure } from '../../redux/userSlice';
+import { Link } from 'react-router-dom';
+// import { loginStart, loginSuccess, loginFailure } from '../../redux/userSlice';
 import './Login.css'; // Optional styling
 import { login } from '../../redux/apiCalls';
 
@@ -8,7 +9,9 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
-  const { isFetching, error} = useSelector()
+  const { isFetching, error} = useSelector((state)=> state.user);
+
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -36,9 +39,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" disabled={pending}>
-          {pending ? 'Logging in...' : 'Login'}
-        </button>
+        <Link>
+          <button type="submit" disabled={isFetching}>
+            {isFetching ? 'Logging in...' : 'Login'}
+          </button>
+        </Link>
       </form>
       {error && <p className="error">Login failed. Please try again.</p>}
     </div>

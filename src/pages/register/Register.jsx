@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Register.css';
 
 const Register = () => {
@@ -10,17 +11,23 @@ const Register = () => {
           <div className="role-card doctor">
             <h3>Doctor</h3>
             <p>Sign up to manage prescriptions and patient information.</p>
-            <button className="register-button">Register as Doctor</button>
+            <Link to="/register/doctor">
+              <button className="register-button">Register as Doctor</button>
+            </Link>
           </div>
           <div className="role-card patient">
             <h3>Patient</h3>
             <p>Sign up to request prescriptions and manage your health.</p>
-            <button className="register-button">Register as Patient</button>
+            <Link to="/register/patient">
+              <button className="register-button">Register as Patient</button>
+            </Link>
           </div>
           <div className="role-card pharmacist">
             <h3>Pharmacist</h3>
             <p>Sign up to manage medications and fulfill prescriptions.</p>
-            <button className="register-button">Register as Pharmacist</button>
+            <Link to="/register/pharmacist">
+              <button className="register-button">Register as Pharmacist</button>
+            </Link>
           </div>
         </div>
       </div>

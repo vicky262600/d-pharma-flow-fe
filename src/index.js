@@ -1,25 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Landing from "./pages/landing/Landing";
-import Register from "./pages/register/Register";
-import DoctorRegister from "./pages/doctorRegister.jsx/DoctorRegister";
-import PatientRegister from "./pages/patientRegister/PatientRegister";
-import PharmacistRegister from "./pages/pharmacistRegister/PharmacistRegister";
-import DoctorPrescription from "./pages/doctorPrescription/DoctorPrescription";
-import Prescription from "./componant/prescriptionCard/PrescriptionCard";
-import Login from "./pages/login/Login";
+import App from "./App";
+// import Landing from "./pages/landing/Landing";
+// import Register from "./pages/register/Register";
+// import DoctorRegister from "./pages/doctorRegister.jsx/DoctorRegister";
+// import PatientRegister from "./pages/patientRegister/PatientRegister";
+// import PharmacistRegister from "./pages/pharmacistRegister/PharmacistRegister";
+// import DoctorPrescription from "./pages/doctorPrescription/DoctorPrescription";
+// import Prescription from "./componant/prescriptionCard/PrescriptionCard";
+// import Login from "./pages/login/Login";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Landing /> */}
-    {/* <Register /> */}
-    {/* <DoctorRegister /> */}
-    {/* <PatientRegister /> */}
-    {/* <PharmacistRegister /> */}
-    // <DoctorPrescription />
-    {/* <Prescription /> */}
-    <Login />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

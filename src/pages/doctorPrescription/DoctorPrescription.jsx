@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import './DoctorPrescription.css';
 import PrescriptionCard from '../../componant/prescriptionCard/PrescriptionCard';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const DoctorPrescription = () => {
   const description = useRef();
@@ -9,6 +10,8 @@ const DoctorPrescription = () => {
   const patientEmail = useRef();
   const medications = useRef();
   const pharmacyId = useRef();
+  const user = useSelector((state) => state.user.currentUser);
+  console.log(user);
 
   const handleClick = async (e) => {
     e.preventDefault();
