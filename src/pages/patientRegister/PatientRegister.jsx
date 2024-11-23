@@ -7,6 +7,7 @@ const PatientRegister =  () => {
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
+  const role = "patient";
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -16,9 +17,10 @@ const PatientRegister =  () => {
     }else{
         try{
           const patient = {
-            name:  name.current.value,
-            email: email.current.value,
-            password: password.current.value
+            patientName:  name.current.value,
+            patientEmail: email.current.value,
+            password: password.current.value,
+            role: role,
           }
           await axios.post("http://localhost:5000/api/v1/auth/register/patient", patient);
           console.log("all done");

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { loginStart, loginSuccess, loginFailure } from '../../redux/userSlice';
 import './Login.css'; // Optional styling
 import { login } from '../../redux/apiCalls';
@@ -10,6 +10,8 @@ const Login = () => {
   const passwordRef = useRef();
   const dispatch = useDispatch();
   const { isFetching, error} = useSelector((state)=> state.user);
+
+  // console.log(user);
 
 
 
@@ -39,11 +41,9 @@ const Login = () => {
             required
           />
         </div>
-        <Link>
           <button type="submit" disabled={isFetching}>
             {isFetching ? 'Logging in...' : 'Login'}
           </button>
-        </Link>
       </form>
       {error && <p className="error">Login failed. Please try again.</p>}
     </div>

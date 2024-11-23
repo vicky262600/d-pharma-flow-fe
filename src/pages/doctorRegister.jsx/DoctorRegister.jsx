@@ -1,15 +1,16 @@
 import React, { useRef } from 'react';
 import axios from 'axios'
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './DoctorRegister.css';
 
 const DoctorRegister = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const name = useRef();
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
   const licenseNumber = useRef();
+  const role = "doctor";
   
   const handleClick = async (e) =>{
     e.preventDefault();
@@ -22,11 +23,12 @@ const DoctorRegister = () => {
         name : name.current.value,
         email : email.current.value,
         password : password.current.value,
-        licenseNumber : licenseNumber.current.value
+        licenseNumber : licenseNumber.current.value,
+        role : role,
       }
-      await axios.post("http://localhost:5000/api/v1/auth/register/doctor", doctor);
-      console.log("all done");
-      // navigate("/login");
+      let user = await axios.post("http://localhost:5000/api/v1/auth/register/doctor", doctor);
+      console.log(user.data);
+      navigate("/login");
       
       }catch(err){
         console.log(err);
