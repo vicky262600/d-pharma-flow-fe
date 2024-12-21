@@ -1,27 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-// import Landing from "./pages/landing/Landing";
-// import Register from "./pages/register/Register";
-// import DoctorRegister from "./pages/doctorRegister.jsx/DoctorRegister";
-// import PatientRegister from "./pages/patientRegister/PatientRegister";
-// import PharmacistRegister from "./pages/pharmacistRegister/PharmacistRegister";
-// import DoctorPrescription from "./pages/doctorPrescription/DoctorPrescription";
-// import Prescription from "./componant/prescriptionCard/PrescriptionCard";
-// import Login from "./pages/login/Login";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { configureStore } from "@reduxjs/toolkit";
+import { PrivyProvider } from "@privy-io/react-auth";
+import App from "./App";
+import userRoleReducer from "./redux/userSlice"; // Import the role reducer
+import "querystring-es3";
+
+// Create the Redux store
+const store = configureStore({
+  reducer: {
+    role: userRoleReducer, // Add the role reducer to the store
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// Retrieve the app key from the environment variables
+const appKey = process.env.REACT_APP_PRIVATE_KEY;
+if (!appKey) {
+  console.error("Missing REACT_APP_PRIVATE_KEY in environment variables");
+}
+
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
+    <Provider store={store}> {/* Pass the store to the Provider */}
+      <PrivyProvider
+        appId={appKey} // Replace this with your actual app ID from the Privy dashboard
+        config={{
+          appearance: {
+            theme: "light",
+            accentColor: "#676FFF", // Customize this color
+            logo: "https://your-logo-url", // Optionally add a logo URL
+          },
+          embeddedWallets: {
+            createOnLogin: "users-without-wallets", // Create wallets for users without one
+          },
+        }}
+      >
+        <App />
+      </PrivyProvider>
     </Provider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
