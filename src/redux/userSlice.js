@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "userRole",
   initialState: {
-    currentRole: null,
+    currentRole: localStorage.getItem("currentRole") || null,
   },
   reducers: {
     addRole: (state, action) => {

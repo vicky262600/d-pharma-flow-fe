@@ -7,27 +7,29 @@ import PharmacistHome from "./pages/pharmacistHome/PharmacistHome";
 import { useSelector } from "react-redux";
 
 function App() {
-  const role = useSelector((state) => state.role.role); // Get role from Redux store
+  const role = useSelector((state) => state.userRole?.currentRole || null); // Get role from Redux store
   const { user } = usePrivy(); // Get user from Privy
 
   return (
     <Router>
       <Routes>
         {/* If the user is authenticated, go to Roles page, else go to Login */}
-        <Route path="/" element={user ? <DoctorPrescription /> : <Login />} />
+        <Route path="/" element={user ? <Roles /> : <Login />} />
 
         {/* Redirect to the appropriate page based on the role */}
         <Route
           path="/login"
-          element={
+          element={user ? ( // Check if the user is authenticated
             role === "doctor" ? (
               <Navigate to="/doctor-prescription" />
             ) : role === "pharmacist" ? (
               <Navigate to="/pharmacist" />
             ) : (
-              <DoctorPrescription />
+              <Navigate to="/" /> // If no role is set, redirect to roles page
             )
-          }
+          ) : (
+            <Login /> // If the user is not authenticated, stay on the login page
+          )}
         />
 
         {/* Doctor-specific route */}
@@ -36,7 +38,7 @@ function App() {
         {/* Pharmacist-specific route */}
         <Route path="/pharmacist" element={<PharmacistHome />} />
 
-        {/* Fallback for undefined roles */}
+        {/* Fallback for undefined routes */}
         <Route
           path="*"
           element={<Navigate to={user ? "/" : "/login"} />}

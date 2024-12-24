@@ -35,6 +35,7 @@ const Roles = () => {
           try{
             // await privy.setCustomMetadata(user.id, {role: role});
             // console.log(user.metadata.role)
+            // console.log(role)
             const userAddress = user.linkedAccounts[0].address;
             console.log("account:", userAddress)
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -45,11 +46,14 @@ const Roles = () => {
               contractAbi,
               signer
             )
-            const tx = await contractInstance.setRole(userAddress, role);
+            const tx = await contractInstance.setRole(role);
             const receipt = await tx.wait();
             console.log(receipt);
 
-            Navigate("/doctor-prescription")
+            if(selectedRole){
+
+              Navigate("/doctor-prescription")
+            }
             
           }catch(err){
             console.log(err);

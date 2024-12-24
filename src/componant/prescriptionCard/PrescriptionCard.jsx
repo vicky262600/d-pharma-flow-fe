@@ -4,7 +4,7 @@ import './PrescriptionCard.css'; // Import CSS file for styling
 const PrescriptionCard = ({ prescriptions }) => {
   return (
     <div className="prescription-card">
-      <h4>{prescriptions.patientName}</h4>
+      <h4>{prescriptions.patientId}</h4>
       <p>{prescriptions.medications}</p>
       {/* <span className={`status ${prescriptions.Status.toLowerCase()}`}>{prescriptions.Status}</span> */}
     </div>

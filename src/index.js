@@ -1,18 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import store from "./redux/store"; 
 import { PrivyProvider } from "@privy-io/react-auth";
 import App from "./App";
 import userRoleReducer from "./redux/userSlice"; // Import the role reducer
 import "querystring-es3";
 
 // Create the Redux store
-const store = configureStore({
-  reducer: {
-    role: userRoleReducer, // Add the role reducer to the store
-  },
-});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

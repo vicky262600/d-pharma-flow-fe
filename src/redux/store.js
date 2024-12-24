@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
+import userRole from "./userSlice";
 
 export default configureStore({
   reducer: {
-    userRole: userRoleReducer,
+    userRole: userRole,
   },
 });

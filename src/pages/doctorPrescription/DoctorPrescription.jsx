@@ -9,31 +9,20 @@ import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
 
 const DoctorPrescription = () => {
+  const [prescriptions, setPrescriptions] = useState([]);
+
   // const { user, logout } = usePrivy();
+  const currentRole = useSelector((state) => state.userRole.currentRole); // Access the current role from the Redux store
+  console.log(currentRole);
   const description = useRef();
-  const patientEmail = useRef();
+  const patientId = useRef();
   const medications = useRef();
   const pharmacyId = useRef();
   // const user = useSelector((state) => state.user.currentUser);
-  const [prescriptions, setPrescriptions] = useState([]);
 
   // console.log("Logged-in User ID:", user.id);
   const {user, logout} = usePrivy();
-  const userId = user.id;
-
-  // useEffect(() => {
-  //   const fetchPrescripition = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/api/v1/prescription/"+ userId);
-  //       console.log("Fetched Prescriptions:", response.data);
-  //       setPrescriptions(response.data);
-  //     } catch (err) {
-  //       console.error("Error fetching prescriptions:", err);
-  //     }
-  //   };
-
-  //   fetchPrescripition();
-  // }, [userId]);
+  const userId = user;
 
   const LogOut = () =>{
     logout();
@@ -52,16 +41,27 @@ const DoctorPrescription = () => {
       contractAddress, contractAbi, signer
     );
 
-    let PatientEmail = ethers.utils.getAddress(patientEmail.current.value);
-    let Medications = medications.current.value;
-    let Description = description.current.value;
+    const PatientId = ethers.utils.getAddress(patientId.current.value);
+    const Medications = medications.current.value;
+    const Description = description.current.value;
     const PharmacyId = ethers.utils.getAddress(pharmacyId.current.value); // Fix checksum here
-    console.log(PatientEmail);
+    console.log(PatientId);
 
-    const tx = await constractInstance.addPrescription(Description, Medications, PatientEmail, PharmacyId);
+    const tx = await constractInstance.addPrescription(Description, Medications, PatientId, PharmacyId);
     const receipt = await tx.wait();
     console.log(receipt);
   };
+
+    const fetchPrescripitions = async () =>{
+       const provider = new ethers.providers.Web3Provider(window.ethereum);
+       const signer = provider.getSigner();
+       const contractInstance = new ethers.Contract(
+        contractAddress, contractAbi, signer
+       );
+       var prescription = await contractInstance.getDoctorPrescription();
+       setPrescriptions(prescription);
+      //  console.log(prescription[0].doctorId)
+    }
 
   return (
     <div className="prescription-page">
@@ -69,8 +69,8 @@ const DoctorPrescription = () => {
         <h2>Create New Prescription</h2>
         <form onSubmit={handleClick}>
           <div className="form-group">
-            <label htmlFor="patientEmail">Patient Email:</label>
-            <input type="text" id="patientEmail" placeholder="Enter patient email" required ref={patientEmail} />
+            <label htmlFor="patientEmail">PatientId:</label>
+            <input type="text" id="patientEmail" placeholder="Enter patient email" required ref={patientId} />
           </div>
           <div className="form-group">
             <label htmlFor="medications">Medications:</label>
@@ -85,18 +85,19 @@ const DoctorPrescription = () => {
             <input type="text" id="pharmacyId" placeholder="Enter pharmacy ID"  required ref={pharmacyId} />
           </div>
           <button type="submit">Create Prescription</button>
-          <button onClick={LogOut}>logout</button>
         </form>
       </div>
 
       <div className="card-container">
         {prescriptions.length > 0 ? (
-          prescriptions.map((prescription) => (
-            <PrescriptionCard key={prescription._id} prescriptions={prescription} />
+          prescriptions.map((prescription, index) => (
+            <PrescriptionCard key={index} prescriptions={prescription} />
           ))
         ) : (
           <p>No prescriptions found.</p>
         )}
+        <button onClick={fetchPrescripitions}>Get Prescription</button>
+        <button onClick={LogOut}>logout</button>
       </div>
     </div>
   );
