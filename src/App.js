@@ -4,6 +4,8 @@ import Login from "./pages/login/Login";
 import Roles from "./pages/roles/Roles";
 import DoctorPrescription from "./pages/doctorPrescription/DoctorPrescription";
 import PharmacistHome from "./pages/pharmacistHome/PharmacistHome";
+import PatientHome from "./pages/patientHome/PatientHome";
+import Navbar from "./componant/navigation/Navbar";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
   const { user } = usePrivy(); // Get user from Privy
 
   return (
+    // // <Navbar/>
+    // <PatientHome/>
     <Router>
       <Routes>
         {/* If the user is authenticated, go to Roles page, else go to Login */}
@@ -21,9 +25,11 @@ function App() {
           path="/login"
           element={user ? ( // Check if the user is authenticated
             role === "doctor" ? (
-              <Navigate to="/doctor-prescription" />
+              <Navigate to="/doctor-page" />
             ) : role === "pharmacist" ? (
-              <Navigate to="/pharmacist" />
+              <Navigate to="/pharmacist-page" />
+            )  : role === "patient" ? (
+              <Navigate to="/patient-page" />
             ) : (
               <Navigate to="/" /> // If no role is set, redirect to roles page
             )
@@ -33,10 +39,12 @@ function App() {
         />
 
         {/* Doctor-specific route */}
-        <Route path="/doctor-prescription" element={<DoctorPrescription />} />
+        <Route path="/doctor-page" element={<DoctorPrescription />} />
 
         {/* Pharmacist-specific route */}
-        <Route path="/pharmacist" element={<PharmacistHome />} />
+        <Route path="/pharmacist-page" element={<PharmacistHome />} />
+
+        <Route path="/patient-page" element={<PatientHome />} />
 
         {/* Fallback for undefined routes */}
         <Route

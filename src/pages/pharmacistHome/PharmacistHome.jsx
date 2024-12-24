@@ -1,32 +1,29 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
+import { ethers } from 'ethers';
 import { useSelector } from 'react-redux';
 import PrescriptionCard  from '../../componant/prescriptionCard/PrescriptionCard';
+import { contractAbi, contractAddress } from '../../constant/constant';
+
 
 const PharmacistHome = () => {
   const [prescriptions, setPrescriptions] = useState([]);
   const user = useSelector((state) => state.user.currentUser);
   const userId = user._id;
-  useEffect(() => {
-    const fetchPrescripition = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/v1/prescription/"+ userId);
-        console.log("Fetched Prescriptions:", response.data);
-        setPrescriptions(response.data);
-      } catch (err) {
-        console.error("Error fetching prescriptions:", err);
-      }
-    };
-
-    fetchPrescripition();
-  }, [userId, prescriptions]);
+  const fetchPrescription = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+    const prescription = await contractInstance.getPharmacyPrescription();
+    setPrescriptions(prescription);
+  }
   return (
     <div>
       <div>
         <h1>Your Orders</h1>
         {prescriptions.length > 0 ? (
-          prescriptions.map((prescription) => (
-            <PrescriptionCard key={prescription._id} prescription={prescription} />
+          prescriptions.map((prescription, index) => (
+            <PrescriptionCard key={index} prescription={prescription} />
           ))
         ) : (
           <p>No prescriptions found.</p>

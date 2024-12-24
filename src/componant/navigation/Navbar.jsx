@@ -1,14 +1,51 @@
 import React from "react";
 import { usePrivy } from "@privy-io/react-auth";
+import { useRef } from "react";
+import { ethers } from "ethers";
 import "./Navbar.css";
+import { contractAbi, contractAddress } from "../../constant/constant";
 
 const Navbar = () => {
-  const { logout, user } = usePrivy();
+  const { login, logout, user } = usePrivy();
+  const amount = useRef();
 
   const handleLogout = () => {
     logout();
     console.log("User logged out");
   };
+
+  const loginClick = () => {
+    login();
+  }
+
+  const donateFunction = async (e) => {
+    e.preventDefault();
+    try{
+    const donationAmount = amount.current.value;
+    console.log(donationAmount);
+    
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    console.log(signer);
+    const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+
+
+    
+    const ethPriceBigNumber = await contractInstance.getPrice();
+    const ethPrice = ethers.utils.formatUnits(ethPriceBigNumber);
+    console.log(ethPrice);
+    
+    const ethToSend = donationAmount / ethPrice;
+
+    const amountInWei = ethers.utils.parseEther(ethToSend.toString());
+
+    const tx = await contractInstance.donateMe({value: amountInWei});
+    console.log(tx);
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <nav className="navbar">
@@ -22,9 +59,18 @@ const Navbar = () => {
             <button className="navbar-button" onClick={handleLogout}>
               Logout
             </button>
+            <form onSubmit={donateFunction}>
+              <div className="form">
+                <input type="number" placeholder="Enter amount" ref={amount}/>
+                <button type="submit">Donate</button>
+              </div>
+            </form>
           </>
         ) : (
-          <span className="navbar-login-prompt">Not logged in</span>
+          <div>
+            <span className="navbar-login-prompt">Not logged in</span>
+            <button onClick={loginClick}>Login</button>
+          </div>
         )}
       </div>
     </nav>

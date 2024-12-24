@@ -1,0 +1,78 @@
+/* PatientHome.css */
+.patient-home {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .patient-home h1 {
+    text-align: center;
+    color: #2d2d2d;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .patient-home .prescriptions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .patient-home .prescriptions-container p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card h3 {
+    font-size: 1.5rem;
+    color: #2d2d2d;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card .description {
+    font-style: italic;
+    color: #777;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card .prescription-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card .prescription-footer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .patient-home .prescriptions-container .prescription-card .prescription-footer button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Add styles for the empty prescription message */
+  .patient-home .prescriptions-container p {
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
