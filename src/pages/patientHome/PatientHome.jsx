@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import PrescriptionCard from '../../componant/prescriptionCard/PrescriptionCard';
 import { contractAbi, contractAddress } from '../../constant/constant';
 import { usePrivy } from '@privy-io/react-auth';
+import Navbar from '../../componant/navigation/Navbar';
 
 const PatientHome = () => {
-  const { user } = usePrivy();
+  const { user, logout } = usePrivy();
   const userAddress = user.id;
   const [prescriptions, setPrescriptions] = useState([]);
 
@@ -40,13 +41,18 @@ const PatientHome = () => {
     }
   }, [userAddress]);
 
+  const logOut = () => {
+    logout();
+  }
+
   return (
     <div>
+      <Navbar/>
       <div>
         <h1>Your Prescriptions</h1>
         {prescriptions.length > 0 ? (
-          prescriptions.map((prescription, index) => (
-            <PrescriptionCard key={index} prescription={prescription} />
+          prescriptions.map((prescriptions, index) => (
+            <PrescriptionCard key={index} prescriptions={prescriptions} />
           ))
         ) : (
           <p>No prescriptions found.</p>

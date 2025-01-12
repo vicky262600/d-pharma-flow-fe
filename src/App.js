@@ -39,12 +39,12 @@ function App() {
         />
 
         {/* Doctor-specific route */}
-        <Route path="/doctor-page" element={<DoctorPrescription />} />
+        <Route path="/doctor-page" element={user ? <DoctorPrescription /> : <Navigate to={"/login"}/>} />
 
         {/* Pharmacist-specific route */}
-        <Route path="/pharmacist-page" element={<PharmacistHome />} />
+        <Route path="/pharmacist-page" element={user ? <PharmacistHome /> : <Navigate to={"/login"}/>} />
 
-        <Route path="/patient-page" element={<PatientHome />} />
+        <Route path="/patient-page" element={user ? <PatientHome /> : <Navigate to={"/login"}/>} />
 
         {/* Fallback for undefined routes */}
         <Route

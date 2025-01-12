@@ -6,7 +6,7 @@ import PrescriptionCard from '../../componant/prescriptionCard/PrescriptionCard'
 import { usePrivy } from '@privy-io/react-auth';
 // import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
+import Navbar from '../../componant/navigation/Navbar';
 
 const DoctorPrescription = () => {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -22,9 +22,9 @@ const DoctorPrescription = () => {
 
   // console.log("Logged-in User ID:", user.id);
   const {user, logout} = usePrivy();
-  const userId = user;
+  const userAddress = user.id;
 
-  const LogOut = () =>{
+  const getOut = () =>{
     logout();
   }
 
@@ -63,7 +63,13 @@ const DoctorPrescription = () => {
       //  console.log(prescription[0].doctorId)
     }
 
+    useEffect(()=>{
+      fetchPrescripitions();
+    },[userAddress]);
+
   return (
+    <>
+      <Navbar/>
     <div className="prescription-page">
       <div className="form-container">
         <h2>Create New Prescription</h2>
@@ -97,9 +103,11 @@ const DoctorPrescription = () => {
           <p>No prescriptions found.</p>
         )}
         <button onClick={fetchPrescripitions}>Get Prescription</button>
-        <button onClick={LogOut}>logout</button>
+        <button onClick={getOut}>logout</button>
       </div>
     </div>
+    
+    </>
   );
 };
 

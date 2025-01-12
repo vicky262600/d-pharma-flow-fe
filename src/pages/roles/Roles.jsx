@@ -12,58 +12,52 @@ import { ethers } from "ethers";
 const Roles = () => {
   const appId = process.env.REACT_APP_PRIVATE_KEY;
   const sercetKey = process.env.SECRET_KEY;
-  const { user, logout, setCustomMetadata } = usePrivy();
+  const { user, logout } = usePrivy();
   // const privy = PrivyClient();
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedRole, setSelectedRole] = useState("");
-  const [ provider, setProvider] = useState("");
 
   const outuser = () => {
     logout();
   }
 
-  // const privy = new PrivyClient({
-  //   appId: appId,
-  //   appSecret: sercetKey,
-  // });
-  
     const handleRoleSelect = async (role) => {
       dispatch(addRole(role));
-        setSelectedRole(role);
+      setSelectedRole(role);
         if(user){
           try{
             // await privy.setCustomMetadata(user.id, {role: role});
             // console.log(user.metadata.role)
-            console.log(role)
-            const userAddress = user.linkedAccounts[0].address;
-            console.log("account:", userAddress)
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            console.log("signer", signer)
-            const contractInstance = new ethers.Contract(
-              contractAddress,
-              contractAbi,
-              signer
-            )
-            const tx = await contractInstance.setRole(role);
-            const receipt = await tx.wait();
-            console.log(receipt);
+            console.log(selectedRole);
+            // const userAddress = user.linkedAccounts[0].address;
+            // console.log("account:", userAddress)
+            // const provider = new ethers.providers.Web3Provider(window.ethereum);
+            // const signer = provider.getSigner();
+            // console.log("signer", signer)
+            // const contractInstance = new ethers.Contract(
+            //   contractAddress,
+            //   contractAbi,
+            //   signer
+            // )
+            // const tx = await contractInstance.setRole(role);
+            // const receipt = await tx.wait();
+            // console.log(receipt);
 
-            if(selectedRole === "doctor"){
-              Navigate("/doctor-prescription")
+            if(role === "doctor"){
+              Navigate("/doctor-page")
             }
 
-            else if(selectedRole === "pharmacist"){
+            else if(role === "pharmacist"){
               Navigate("/pharmacist-page");
             }
 
-            else if(selectedRole === "patient"){
+            else if(role === "patient"){
               Navigate("/patient-page");
             }
 
             else{
-              console.log("select Role");
+              console.log("please select Role");
             }
             
           }catch(err){
@@ -99,7 +93,7 @@ return (
           </button>
           <button
                       className="role-button"
-                      onClick={() => outuser("pharmacist")}
+                      onClick={outuser}
           >
             logout
           </button>

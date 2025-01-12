@@ -7,42 +7,58 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-image: url('https://private-user-images.githubusercontent.com/145147066/402198796-70834ad0-e3d0-40f2-ad4b-958e448b47bf.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY1Njg5MDUsIm5iZiI6MTczNjU2ODYwNSwicGF0aCI6Ii8xNDUxNDcwNjYvNDAyMTk4Nzk2LTcwODM0YWQwLWUzZDAtNDBmMi1hZDRiLTk1OGU0NDhiNDdiZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMTExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDExMVQwNDEwMDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05NDhhYWQwNzJkZGVhY2Q3ODAzYWJhN2Q5NzdiYzVmNmIxNDA0ZTU4MTIxN2Q5YjhkZGNjY2Q2OTVkYTE0MDE5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.r9H1kCsb48buzCI1kNA5dw-sV9KU6FtPK7G9dqC6Njs');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Set default text color to white */
 }
 
 .login-container {
-  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: 100vh;
 }
 
-.login-card {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
+.login-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.left-title {
+  font-size: 3rem;
+}
+
+.login-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .login-title {
   font-size: 2rem;
-  color: #333;
+  color: white; /* Title text white */
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #4CAF50;  /* Green color for the title */
 }
 
 .login-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: white; /* Subtitle text white */
   margin-bottom: 2rem;
 }
 
 .login-button, .logout-button {
   background-color: #4CAF50; /* Green color for button */
-  color: white;
+  color: white; /* Text inside buttons */
   padding: 1rem 2rem;
   border: none;
   border-radius: 5px;
@@ -50,6 +66,7 @@ body {
   font-size: 1.1rem;
   transition: background-color 0.3s;
   margin-top: 1rem;
+  width: 100%;
 }
 
 .login-button:hover, .logout-button:hover {
@@ -61,6 +78,6 @@ body {
   padding: 1rem;
   border-radius: 5px;
   margin-top: 1rem;
-  color: #333;
+  color: white; /* User info text white */
   word-wrap: break-word;
 }
