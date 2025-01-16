@@ -1,36 +1,37 @@
 .prescription-card {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #dee2e6;
-    overflow: scroll;
-  }
-  
-  .prescription-card h4 {
-    font-size: 1.1em;
-    color: #0d47a1;
-    margin-bottom: 5px;
-  }
-  
-  .prescription-card p {
-    font-size: 0.9em;
-    color: #495057;
-    margin-bottom: 8px;
-  }
-  
-  .status {
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    color: #fff;
-  }
-  
-  .status.pending {
-    background-color: #ff9800;
-  }
-  
-  .status.completed {
-    background-color: #4caf50;
-  }
-  
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #dee2e6;
+  overflow: scroll;
+  color: #000 !important;; /* Ensure all text within this container is black */
+}
+
+.prescription-card h4 {
+  font-size: 1.1em;
+  color: #000 !important; /* Force black for the h4 element */
+  margin-bottom: 5px;
+}
+
+.prescription-card p {
+  font-size: 0.9em;
+  color: #000 !important; /* Force black for paragraph text */
+  margin-bottom: 8px;
+}
+
+.status {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  color: #000 !important; /* Set text color of the status to black */
+  background-color: #ffcc00; /* Adjusted background for contrast */
+}
+
+.status.pending {
+  background-color: #ffd54f; /* Slightly lighter orange for contrast */
+}
+
+.status.completed {
+  background-color: #aed581; /* Lighter green for completed */
+}

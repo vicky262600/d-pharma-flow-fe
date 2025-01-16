@@ -21,12 +21,8 @@ const DoctorPrescription = () => {
   // const user = useSelector((state) => state.user.currentUser);
 
   // console.log("Logged-in User ID:", user.id);
-  const {user, logout} = usePrivy();
+  const {user} = usePrivy();
   const userAddress = user.id;
-
-  const getOut = () =>{
-    logout();
-  }
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -50,6 +46,7 @@ const DoctorPrescription = () => {
     const tx = await constractInstance.addPrescription(Description, Medications, PatientId, PharmacyId);
     const receipt = await tx.wait();
     console.log(receipt);
+    alert("the prescription is added on the blockchain");
   };
 
     const fetchPrescripitions = async () =>{
@@ -76,7 +73,7 @@ const DoctorPrescription = () => {
         <form onSubmit={handleClick}>
           <div className="form-group">
             <label htmlFor="patientEmail">PatientId:</label>
-            <input type="text" id="patientEmail" placeholder="Enter patient email" required ref={patientId} />
+            <input type="text" id="patientEmail" placeholder="Enter patient address" required ref={patientId} />
           </div>
           <div className="form-group">
             <label htmlFor="medications">Medications:</label>
@@ -88,7 +85,7 @@ const DoctorPrescription = () => {
           </div>
           <div className="form-group">
             <label htmlFor="pharmacyId">Pharmacy ID:</label>
-            <input type="text" id="pharmacyId" placeholder="Enter pharmacy ID"  required ref={pharmacyId} />
+            <input type="text" id="pharmacyId" placeholder="Enter pharmacy address"  required ref={pharmacyId} />
           </div>
           <button type="submit">Create Prescription</button>
         </form>
@@ -97,13 +94,12 @@ const DoctorPrescription = () => {
       <div className="card-container">
         {prescriptions.length > 0 ? (
           prescriptions.map((prescription, index) => (
-            <PrescriptionCard key={index} prescriptions={prescription} />
+            <PrescriptionCard key={index} index={index} prescriptions={prescription} />
           ))
         ) : (
           <p>No prescriptions found.</p>
         )}
-        <button onClick={fetchPrescripitions}>Get Prescription</button>
-        <button onClick={getOut}>logout</button>
+        <button onClick={fetchPrescripitions}>Refresh Prescription</button>
       </div>
     </div>
     

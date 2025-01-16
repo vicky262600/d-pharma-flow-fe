@@ -1,4 +1,4 @@
-const contractAddress = "0xA227c7A11BC3ACD1558A45A9Bf758DEDf3166375";
+const contractAddress = "0xbce66D105e761AfD363a68E95D413128CC2cDc1D";
 
 const contractAbi = [
   {
@@ -50,6 +50,19 @@ const contractAbi = [
       }
     ],
     "name": "addPrescription",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "approvePrescription",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -123,6 +136,11 @@ const contractAbi = [
             "internalType": "address",
             "name": "doctorId",
             "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isAccepted",
+            "type": "bool"
           }
         ],
         "internalType": "struct dPharma.Prescription[]",
@@ -163,6 +181,11 @@ const contractAbi = [
             "internalType": "address",
             "name": "doctorId",
             "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isAccepted",
+            "type": "bool"
           }
         ],
         "internalType": "struct dPharma.Prescription[]",
@@ -203,6 +226,11 @@ const contractAbi = [
             "internalType": "address",
             "name": "doctorId",
             "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isAccepted",
+            "type": "bool"
           }
         ],
         "internalType": "struct dPharma.Prescription[]",
@@ -324,6 +352,11 @@ const contractAbi = [
         "internalType": "address",
         "name": "doctorId",
         "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "isAccepted",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

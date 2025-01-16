@@ -1,14 +1,12 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { useSelector } from 'react-redux';
 import PrescriptionCard from '../../componant/prescriptionCard/PrescriptionCard';
 import { contractAbi, contractAddress } from '../../constant/constant';
 import { usePrivy } from '@privy-io/react-auth';
 import Navbar from '../../componant/navigation/Navbar';
 
 const PatientHome = () => {
-  const { user, logout } = usePrivy();
+  const { user } = usePrivy();
   const userAddress = user.id;
   const [prescriptions, setPrescriptions] = useState([]);
 
@@ -27,12 +25,17 @@ const PatientHome = () => {
   };
 
   const getDonation = () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    try{
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractInstance = new ethers.Contract( contractAddress, contractAbi, signer);
 
     const tx = contractInstance.withdrawDonation();
+    alert("The donation is credited in your wallet");
     console.log(tx);
+    }catch(err){
+      alert(err);
+    }
   }
 
   useEffect(() => {
@@ -41,9 +44,6 @@ const PatientHome = () => {
     }
   }, [userAddress]);
 
-  const logOut = () => {
-    logout();
-  }
 
   return (
     <div>
@@ -52,7 +52,7 @@ const PatientHome = () => {
         <h1>Your Prescriptions</h1>
         {prescriptions.length > 0 ? (
           prescriptions.map((prescriptions, index) => (
-            <PrescriptionCard key={index} prescriptions={prescriptions} />
+            <PrescriptionCard key={index} index={index} prescriptions={prescriptions} />
           ))
         ) : (
           <p>No prescriptions found.</p>

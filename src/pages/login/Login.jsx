@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "./Login.css";
 
 const Login = () => {
-  const { login, user, logout } = usePrivy();
+  const { login, user } = usePrivy();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,13 +15,16 @@ const Login = () => {
   }, [user]);
 
   const handleLoginClick = (e) => {
-    e.preventDefault();
+    if(window.ethereum){
+      e.preventDefault();
     login();
+    }
+    else{
+      alert("you do not have any wallet connected")
+    }
   };
 
-  const handleLogoutClick = () => {
-    logout();
-  };
+
 
   return (
     <div className="login-container">
@@ -33,9 +36,6 @@ const Login = () => {
         <p className="login-subtitle">Connect with your wallet to get started</p>
         <button onClick={handleLoginClick} className="login-button">
           Connect Wallet
-        </button>
-        <button onClick={handleLogoutClick} className="logout-button">
-          Log Out
         </button>
       </div>
     </div>

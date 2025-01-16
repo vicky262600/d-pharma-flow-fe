@@ -8,7 +8,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import './PharmacistHome.css';
 
 const PharmacistHome = () => {
-  const { user, logout} = usePrivy();
+  const { user } = usePrivy();
   let userAddress = user.id;
   const [prescriptions, setPrescriptions] = useState([]);
   const currentRole = useSelector((state) => state.userRole.currentRole); // Access the current role from the Redux store
@@ -22,13 +22,10 @@ const PharmacistHome = () => {
     setPrescriptions(prescription);
     console.log(prescription);
   };
+
   useEffect(()=>{
     fetchPrescription();
-  },[userAddress])
-
-  const logOut = () => {
-    logout();
-  }
+  },[userAddress]);
 
   return (
     <div className="container">
@@ -37,14 +34,13 @@ const PharmacistHome = () => {
       <div className="prescription-list">
         {prescriptions.length > 0 ? (
           prescriptions.map((prescription, index) => (
-            <PrescriptionCard key={index} prescriptions={prescription} />
+            <PrescriptionCard key={index} index={index}prescriptions={prescription} />
           ))
         ) : (
           <p>No prescriptions found.</p>
         )}
       </div>
-      <button onClick={fetchPrescription}>Get Prescription</button>
-      <button onClick={logOut}>Logout</button>
+      <button onClick={fetchPrescription}>Refresh Prescription</button>
     </div>
   );
 };
