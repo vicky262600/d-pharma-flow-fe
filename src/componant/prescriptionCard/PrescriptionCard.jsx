@@ -27,7 +27,7 @@ const PrescriptionCard =  ({ prescriptions, index }) => {
       <p>index: {index}</p>
       <p>medications: {prescriptions.medications}</p>
       <p>description: {prescriptions.description}</p>
-      <h3>statues : {prescriptions.isAccepted === false ? <samp>pending</samp> : <samp>accepted</samp>}</h3>
+      <h3>status : {prescriptions.isAccepted === false ? <samp>pending</samp> : <samp>accepted</samp>}</h3>
       {currentRole === "pharmacist" && prescriptions.isAccepted === false ? <button onClick={approvePrescription}>pending</button> : <samp></samp>}
 
     </div>
